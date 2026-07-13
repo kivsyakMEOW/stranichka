@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Клан Золотых Песков</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;600;800&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+<style>
+  :root{
+    --pink-0:#fff2f7;
+    --pink-1:#fbe0ec;
+    --pink-2:#f6b9d6;
+    --pink-3:#e98fc0;
+    --ink:#3a2233;
+    --ink-soft:#6e4d63;
+    --glass:rgba(255,255,255,0.5);
+    --glass-strong:rgba(255,255,255,0.72);
+    --glass-border:rgba(255,255,255,0.85);
+    --rainbow: conic-gradient(from 0deg, #ff6b9d, #ffb86b, #ffe66b, #8effa0, #6bd6ff, #b98bff, #ff6bd6, #ff6b9d);
+    --shadow-soft: 0 8px 32px rgba(200,80,150,0.18);
+    --radius-xl: 32px;
+    --radius-lg: 24px;
+    --radius-md: 18px;
+    --radius-sm: 12px;
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    font-family:'Manrope',sans-serif;
+    color:var(--ink);
+    background:
+      radial-gradient(circle at 15% 10%, #ffe0ee 0%, transparent 45%),
+      radial-gradient(circle at 85% 15%, #e0f0ff 0%, transparent 40%),
+      radial-gradient(circle at 75% 85%, #fff0d9 0%, transparent 45%),
+      radial-gradient(circle at 20% 90%, #e6ffe9 0%, transparent 40%),
+      linear-gradient(160deg, var(--pink-0), var(--pink-1) 60%, var(--pink-2) 100%);
+    background-attachment:fixed;
+    min-height:100vh;
+    overflow-x:hidden;
+  }
+
+  .blob{
+    position:fixed; border-radius:50%; filter:blur(60px); opacity:0.45; z-index:0; pointer-events:none;
+    animation:float 18s ease-in-out infinite;
+  }
+  .blob-a{width:340px;height:340px;background:#ffb3d9;top:-80px;left:-100px;}
+  .blob-b{width:280px;height:280px;background:#b7e0ff;top:20%;right:-120px;animation-delay:3s;}
+  .blob-c{width:260px;height:260px;background:#ffe3a3;bottom:-100px;left:20%;animation-delay:6s;}
+  .blob-d{width:220px;height:220px;background:#c9ffd6;bottom:10%;right:10%;animation-delay:9s;}
+  @keyframes float{0%,100%{transform:translate(0,0) scale(1);} 50%{transform:translate(30px,-25px) scale(1.08);}}
+  @media (prefers-reduced-motion: reduce){.blob,.rb-btn::before{animation:none !important;} html{scroll-behavior:auto;}}
+
+  header{position:sticky; top:0; z-index:50; display:flex; justify-content:center; padding:18px 16px;}
+  nav{
+    display:flex; gap:8px; flex-wrap:wrap; justify-content:center; padding:8px; border-radius:999px;
+    background:var(--glass); backdrop-filter:blur(20px) saturate(160%); -webkit-backdrop-filter:blur(20px) saturate(160%);
+    border:1px solid var(--glass-border); box-shadow:var(--shadow-soft);
+  }
+  nav button{
+    font-family:'Unbounded',sans-serif; font-size:13px; font-weight:600; letter-spacing:0.02em;
+    color:var(--ink-soft); background:transparent; border:none; padding:12px 20px; border-radius:999px;
+    cursor:pointer; transition:all .25s ease; position:relative;
+  }
+  nav button:hover{color:var(--ink); background:rgba(255,255,255,0.6);}
+  nav button.active{color:#fff; background:linear-gradient(135deg,#ff6ba0,#c17bff); box-shadow:0 4px 16px rgba(230,100,170,0.45);}
+  nav button:focus-visible, .rb-btn:focus-visible, .tab-pill:focus-visible{outline:3px solid #b98bff; outline-offset:2px;}
+
+  main{position:relative; z-index:1; max-width:980px; margin:0 auto; padding:20px 20px 100px;}
+  section{display:none; animation:fadeIn .4s ease;}
+  section.active{display:block;}
+  @keyframes fadeIn{from{opacity:0; transform:translateY(8px);} to{opacity:1; transform:translateY(0);}}
+
+  .glass{
+    background:var(--glass-strong); backdrop-filter:blur(24px) saturate(180%); -webkit-backdrop-filter:blur(24px) saturate(180%);
+    border:1px solid var(--glass-border); border-radius:var(--radius-xl); box-shadow:var(--shadow-soft);
+  }
+
+  .hero{padding:56px 40px; text-align:center; margin-top:8px; position:relative; overflow:hidden;}
+  .hero::after{
+    content:""; position:absolute; inset:-2px; border-radius:var(--radius-xl); padding:2px; background:var(--rainbow);
+    -webkit-mask:linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    -webkit-mask-composite:xor; mask-composite:exclude; opacity:0.6; pointer-events:none;
+  }
+  .eyebrow{font-family:'Unbounded',sans-serif; font-size:12px; font-weight:600; letter-spacing:0.14em; text-transform:uppercase; color:var(--pink-3); margin-bottom:14px;}
+  h1.title{
+    font-family:'Unbounded',sans-serif; font-size:clamp(32px,6vw,52px); font-weight:800; margin:0 0 14px;
+    background:linear-gradient(100deg,#ff5f9e,#b25cff 40%,#5cb8ff 70%,#ffb85c);
+    -webkit-background-clip:text; background-clip:text; color:transparent; line-height:1.1;
+  }
+  .subtitle{font-size:16px; color:var(--ink-soft); max-width:520px; margin:0 auto 32px; line-height:1.6;}
+  .quicklinks{display:flex; gap:14px; flex-wrap:wrap; justify-content:center;}
+
+  .rb-btn{
+    position:relative; font-family:'Unbounded',sans-serif; font-size:14px; font-weight:600; color:var(--ink);
+    padding:14px 26px; border-radius:999px; background:var(--glass-strong); border:1px solid rgba(255,255,255,0.9);
+    cursor:pointer; isolation:isolate; transition:transform .2s ease, box-shadow .2s ease, color .2s ease;
+  }
+  .rb-btn::before{content:""; position:absolute; inset:-2px; z-index:-1; border-radius:999px; background:var(--rainbow); animation:spin 6s linear infinite; opacity:0.9;}
+  .rb-btn::after{content:""; position:absolute; inset:1.5px; z-index:-1; border-radius:999px; background:var(--glass-strong);}
+  .rb-btn:hover{transform:translateY(-3px); box-shadow:0 10px 24px rgba(210,110,180,0.35);}
+  @keyframes spin{to{transform:rotate(360deg);}}
+
+  .card-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:18px; margin-top:28px;}
+  @media(max-width:720px){.card-grid{grid-template-columns:1fr;}}
+  .nav-card{padding:26px 22px; text-align:left; cursor:pointer; transition:transform .25s ease, box-shadow .25s ease; border:1px solid var(--glass-border);}
+  .nav-card:hover{transform:translateY(-5px); box-shadow:0 14px 30px rgba(210,110,180,0.28);}
+  .nav-card .ico{width:44px; height:44px; border-radius:14px; display:flex; align-items:center; justify-content:center; background:var(--rainbow); margin-bottom:14px; font-size:20px;}
+  .nav-card h3{font-family:'Unbounded',sans-serif; font-size:16px; margin:0 0 8px; color:var(--ink);}
+  .nav-card p{font-size:13.5px; color:var(--ink-soft); margin:0; line-height:1.5;}
+
+  .section-head{padding:36px 40px 24px; text-align:center;}
+  .section-head h2{font-family:'Unbounded',sans-serif; font-size:clamp(24px,4vw,34px); margin:0 0 10px; color:var(--ink);}
+  .section-head p{color:var(--ink-soft); max-width:480px; margin:0 auto; font-size:14.5px; line-height:1.6;}
+
+  .tab-pills{display:flex; gap:10px; justify-content:center; margin:22px 0 0; flex-wrap:wrap;}
+  .tab-pill{
+    font-family:'Unbounded',sans-serif; font-size:12.5px; font-weight:600; padding:10px 20px; border-radius:999px; cursor:pointer;
+    background:rgba(255,255,255,0.55); border:1px solid var(--glass-border); color:var(--ink-soft); transition:all .2s ease;
+  }
+  .tab-pill:hover{background:rgba(255,255,255,0.8);}
+  .tab-pill.active{background:linear-gradient(135deg,#ff8fc1,#b98bff); color:#fff; box-shadow:0 6px 16px rgba(210,110,180,0.4);}
+
+  .subsection{display:none; padding:32px 40px 44px;}
+  .subsection.active{display:block; animation:fadeIn .35s ease;}
+
+  .lore-block{display:flex; align-items:center; gap:22px; margin-bottom:22px; padding:18px; border-radius:var(--radius-md); background:rgba(255,255,255,0.45);}
+  .lore-block.reverse{flex-direction:row-reverse;}
+  .lore-block .img-slot{
+    flex:0 0 160px; width:160px; height:160px; border-radius:var(--radius-md); overflow:hidden; position:relative;
+    background:linear-gradient(135deg,var(--pink-2),var(--pink-3)); box-shadow:0 4px 14px rgba(210,110,180,0.3);
+  }
+  .lore-block .img-slot img{width:100%; height:100%; object-fit:cover; display:block;}
+  .lore-block .img-slot .placeholder-label{
+    position:absolute; inset:0; display:flex; align-items:center; justify-content:center; text-align:center; padding:10px;
+    font-family:'Unbounded',sans-serif; font-size:11px; color:#fff; opacity:0.85;
+  }
+  .lore-block .text{flex:1; min-width:0;}
+  .lore-block h4{margin:0 0 6px; font-family:'Unbounded',sans-serif; font-size:14.5px;}
+  .lore-block p{margin:0; font-size:13.5px; color:var(--ink-soft); line-height:1.6;}
+  @media(max-width:560px){
+    .lore-block, .lore-block.reverse{flex-direction:column;}
+    .lore-block .img-slot{width:100%; flex-basis:auto; height:180px;}
+  }
+
+  .personal-body{padding:0 40px 44px;}
+  .personal-body p{font-size:14.5px; color:var(--ink-soft); line-height:1.75; max-width:640px; margin:0 auto 16px;}
+
+  .gallery-grid{column-count:3; column-gap:16px; padding:0 40px 44px;}
+  @media(max-width:860px){.gallery-grid{column-count:2;}}
+  @media(max-width:520px){.gallery-grid{column-count:1;}}
+  .shot{
+    break-inside:avoid; margin-bottom:16px; border-radius:var(--radius-md); padding:5px; background:var(--rainbow);
+    display:block; box-shadow:0 8px 20px rgba(180,100,160,0.22); transition:transform .25s ease, box-shadow .25s ease;
+  }
+  .shot:hover{transform:scale(1.02) translateY(-3px); box-shadow:0 14px 28px rgba(150,90,150,0.3);}
+  .shot img{display:block; width:100%; height:auto; border-radius:calc(var(--radius-md) - 5px);}
+  .shot .caption{display:block; font-family:'Unbounded',sans-serif; font-size:10.5px; color:#fff; padding:6px 4px 2px; text-align:center;}
+
+  .empty-note{font-size:13px; color:var(--ink-soft); text-align:center; padding:20px; opacity:0.8;}
+
+  footer{text-align:center; padding:30px 20px 50px; color:var(--ink-soft); font-size:12.5px; position:relative; z-index:1;}
+</style>
+</head>
+<body>
+
+<div class="blob blob-a"></div>
+<div class="blob blob-b"></div>
+<div class="blob blob-c"></div>
+<div class="blob blob-d"></div>
+
+<header>
+  <nav>
+    <button class="active" data-target="home">Главная</button>
+    <button data-target="history">История персонажа</button>
+    <button data-target="personal">Личное</button>
+    <button data-target="gallery">Галерея</button>
+  </nav>
+</header>
+
+<main>
+
+  <section id="home" class="active">
+    <div class="glass hero">
+      <div class="eyebrow" id="home-eyebrow">Клан Золотых Песков</div>
+      <h1 class="title" id="home-title">Загрузка…</h1>
+      <p class="subtitle" id="home-subtitle"></p>
+      <div class="quicklinks">
+        <button class="rb-btn" onclick="goTo('history')">В историю персонажа</button>
+        <button class="rb-btn" onclick="goTo('gallery')">В галерею</button>
+      </div>
+    </div>
+
+    <div class="card-grid">
+      <div class="nav-card glass" onclick="goTo('history')">
+        <div class="ico">📖</div>
+        <h3>История персонажа</h3>
+        <p>Котячество и взрослая жизнь — путь Медного Разлома внутри клана.</p>
+      </div>
+      <div class="nav-card glass" onclick="goTo('personal')">
+        <div class="ico">🌸</div>
+        <h3>Личное</h3>
+        <p>Не про лор — про меня: почему я это делаю и как это устроено.</p>
+      </div>
+      <div class="nav-card glass" onclick="goTo('gallery')">
+        <div class="ico">🖼️</div>
+        <h3>Галерея</h3>
+        <p>Скриншоты из игры, связанные с персонажем и кланом.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="history">
+    <div class="glass" style="overflow:hidden;">
+      <div class="section-head">
+        <h2>История персонажа</h2>
+        <p>Два лорных этапа жизни Медного Разлома — от котёнка до взрослого воина клана.</p>
+        <div class="tab-pills">
+          <button class="tab-pill active" data-sub="kittenhood">Котячество</button>
+          <button class="tab-pill" data-sub="adulthood">Взрослая жизнь</button>
+        </div>
+      </div>
+      <div id="kittenhood" class="subsection active"><p class="empty-note">Загрузка…</p></div>
+      <div id="adulthood" class="subsection"><p class="empty-note">Загрузка…</p></div>
+    </div>
+  </section>
+
+  <section id="personal">
+    <div class="glass" style="overflow:hidden;">
+      <div class="section-head">
+        <h2>Личное</h2>
+        <p>Не про персонажа — про меня как автора этого проекта.</p>
+      </div>
+      <div class="personal-body" id="personal-body"><p>Загрузка…</p></div>
+    </div>
+  </section>
+
+  <section id="gallery">
+    <div class="glass" style="overflow:hidden;">
+      <div class="section-head">
+        <h2>Галерея скриншотов</h2>
+        <p>Скриншоты из игры, добавленные через админ-панель.</p>
+      </div>
+      <div class="gallery-grid" id="gallery-grid"><p class="empty-note">Загрузка…</p></div>
+    </div>
+  </section>
+
+</main>
+
+<footer>Клан Золотых Песков · фан-проект</footer>
+
+<script>
+  /* ====== НАСТРОЙКА: впиши сюда свой GitHub-логин и название репозитория ====== */
+  const GH_OWNER  = "ТВОЙ_GITHUB_ЛОГИН";
+  const GH_REPO   = "НАЗВАНИЕ_РЕПОЗИТОРИЯ";
+  const GH_BRANCH = "main";
+  /* ============================================================================ */
+
+  const navButtons = document.querySelectorAll('header nav button');
+  const sections = document.querySelectorAll('main > section');
+
+  function goTo(id){
+    navButtons.forEach(b=>b.classList.toggle('active', b.dataset.target===id));
+    sections.forEach(s=>s.classList.toggle('active', s.id===id));
+    window.scrollTo({top:0,behavior:'smooth'});
+  }
+  navButtons.forEach(btn=>btn.addEventListener('click', ()=>goTo(btn.dataset.target)));
+
+  const tabPills = document.querySelectorAll('.tab-pill');
+  const subsections = document.querySelectorAll('.subsection');
+  tabPills.forEach(pill=>{
+    pill.addEventListener('click', ()=>{
+      tabPills.forEach(p=>p.classList.toggle('active', p===pill));
+      subsections.forEach(s=>s.classList.toggle('active', s.id===pill.dataset.sub));
+    });
+  });
+
+  async function fetchJSON(path){
+    const res = await fetch(path + '?t=' + Date.now());
+    if(!res.ok) throw new Error('not found: ' + path);
+    return res.json();
+  }
+
+  async function fetchFolderItems(folder){
+    const url = `https://api.github.com/repos/${GH_OWNER}/${GH_REPO}/contents/${folder}?ref=${GH_BRANCH}`;
+    const res = await fetch(url);
+    if(!res.ok) return [];
+    const files = await res.json();
+    if(!Array.isArray(files)) return [];
+    const jsonFiles = files.filter(f => f.name.endsWith('.json'));
+    const items = await Promise.all(jsonFiles.map(f => fetch(f.download_url).then(r => r.json())));
+    return items;
+  }
+
+  function renderLore(containerId, items){
+    const el = document.getElementById(containerId);
+    if(!items.length){ el.innerHTML = '<p class="empty-note">Пока нет ни одного эпизода. Добавь его через /admin.</p>'; return; }
+    items.sort((a,b) => (a.order||0) - (b.order||0));
+    el.innerHTML = items.map((item, i) => `
+      <div class="lore-block ${i % 2 === 1 ? 'reverse' : ''}">
+        <div class="img-slot">
+          ${item.image ? `<img src="${item.image}" alt="${item.title||''}">` : `<div class="placeholder-label">нет изображения</div>`}
+        </div>
+        <div class="text">
+          <h4>${item.title || ''}</h4>
+          <p>${(item.text||'').replace(/\\n/g,'<br>')}</p>
+        </div>
+      </div>
+    `).join('');
+  }
+
+  function renderGallery(items){
+    const el = document.getElementById('gallery-grid');
+    if(!items.length){ el.innerHTML = '<p class="empty-note">Пока нет скриншотов. Добавь их через /admin.</p>'; return; }
+    el.innerHTML = items.map(item => `
+      <div class="shot">
+        <img src="${item.image}" alt="${item.caption||'Скриншот из игры'}">
+        ${item.caption ? `<span class="caption">${item.caption}</span>` : ''}
+      </div>
+    `).join('');
+  }
+
+  async function init(){
+    try{
+      const home = await fetchJSON('content/home.json');
+      document.getElementById('home-eyebrow').textContent = home.eyebrow || '';
+      document.getElementById('home-title').textContent = home.title || '';
+      document.getElementById('home-subtitle').textContent = home.subtitle || '';
+    }catch(e){ console.warn('home.json не загружен', e); }
+
+    try{
+      const personal = await fetchJSON('content/personal.json');
+      const paragraphs = (personal.body || '').split('\n').filter(Boolean);
+      document.getElementById('personal-body').innerHTML = paragraphs.map(p => `<p>${p}</p>`).join('');
+    }catch(e){ console.warn('personal.json не загружен', e); }
+
+    try{
+      const kittenhood = await fetchFolderItems('content/kittenhood');
+      renderLore('kittenhood', kittenhood);
+    }catch(e){ console.warn('kittenhood не загружен', e); }
+
+    try{
+      const adulthood = await fetchFolderItems('content/adulthood');
+      renderLore('adulthood', adulthood);
+    }catch(e){ console.warn('adulthood не загружен', e); }
+
+    try{
+      const gallery = await fetchFolderItems('content/gallery');
+      renderGallery(gallery);
+    }catch(e){ console.warn('gallery не загружен', e); }
+  }
+
+  init();
+</script>
+
+</body>
+</html>

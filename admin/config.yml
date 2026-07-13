@@ -1,0 +1,61 @@
+backend:
+  name: git-gateway
+  branch: main
+
+media_folder: "images"
+public_folder: "/images"
+
+collections:
+  - name: "home"
+    label: "Главная страница"
+    files:
+      - file: "content/home.json"
+        label: "Главная"
+        name: "home"
+        fields:
+          - {label: "Название клана (маленькая строка сверху)", name: "eyebrow", widget: "string"}
+          - {label: "Заголовок (имя персонажа)", name: "title", widget: "string"}
+          - {label: "Подзаголовок", name: "subtitle", widget: "text"}
+
+  - name: "personal"
+    label: "Личное"
+    files:
+      - file: "content/personal.json"
+        label: "Текст раздела «Личное»"
+        name: "personal"
+        fields:
+          - {label: "Абзацы (каждый с новой строки)", name: "body", widget: "text"}
+
+  - name: "kittenhood"
+    label: "История: Котячество"
+    folder: "content/kittenhood"
+    create: true
+    format: "json"
+    slug: "{{fields.order}}-{{slug}}"
+    fields:
+      - {label: "Порядок (1, 2, 3...)", name: "order", widget: "number", default: 1}
+      - {label: "Заголовок эпизода", name: "title", widget: "string"}
+      - {label: "Текст", name: "text", widget: "text"}
+      - {label: "Изображение", name: "image", widget: "image", required: false}
+
+  - name: "adulthood"
+    label: "История: Взрослая жизнь"
+    folder: "content/adulthood"
+    create: true
+    format: "json"
+    slug: "{{fields.order}}-{{slug}}"
+    fields:
+      - {label: "Порядок (1, 2, 3...)", name: "order", widget: "number", default: 1}
+      - {label: "Заголовок эпизода", name: "title", widget: "string"}
+      - {label: "Текст", name: "text", widget: "text"}
+      - {label: "Изображение", name: "image", widget: "image", required: false}
+
+  - name: "gallery"
+    label: "Галерея скриншотов"
+    folder: "content/gallery"
+    create: true
+    format: "json"
+    slug: "{{slug}}"
+    fields:
+      - {label: "Скриншот", name: "image", widget: "image"}
+      - {label: "Подпись (не обязательно)", name: "caption", widget: "string", required: false}
